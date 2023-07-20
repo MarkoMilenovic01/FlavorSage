@@ -54,4 +54,22 @@ class UserController extends Controller
 
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
+
+    public function dashboard(){
+        if(auth()->user()->isAdmin()){
+            return view('admin.dashboard', [
+                'users' => User::latest()->paginate(5)
+            ]);
+        }else{
+            abort(403,'Access unauthorized!');
+        }
+    }
+
+    public function promoteDemote($id,Request $request){
+        $user = User::find($id);
+        $user->role = request('role');
+        $text = request('role') == 0 ? 'demoted' : 'promoted';
+        $user->save();
+        return redirect('/admin/dashboard')->with('message', 'You have ' . $text . ' ' . $user->name);
+    }
 }

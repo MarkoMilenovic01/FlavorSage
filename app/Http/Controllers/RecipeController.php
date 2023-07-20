@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 
@@ -51,7 +52,7 @@ class RecipeController extends Controller
         
         $recipe = Recipe::find($id);
 
-        if($recipe->user_id != auth()->id()){
+        if($recipe->user_id != auth()->id() && auth()->user()->isUser()){
             abort(403, 'Unauthorized Action.');
         }
 
@@ -86,7 +87,7 @@ class RecipeController extends Controller
     public function destroy($id){
         $recipe = Recipe::find($id);
 
-        if($recipe->user_id != auth()->id()){
+        if($recipe->user_id != auth()->id() && auth()->user()->isUser()){
             abort(403, 'Unauthorized Action.');
         }
 
@@ -96,9 +97,16 @@ class RecipeController extends Controller
     }
 
     public function manage(){
-        return view('recipes.manage', [
-            'recipes' => auth()->user()->recipes
-        ]);
+        if(auth()->user()->isUser()){
+            return view('recipes.manage', [
+                'recipes' => auth()->user()->recipes
+            ]);
+        }else{
+            return view('recipes.manage', [
+                'recipes' => Recipe::all()
+            ]);
+        }
+       
     }
 
 }
