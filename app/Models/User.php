@@ -51,10 +51,7 @@ class User extends Authenticatable
     public function recipes(){
         return $this->hasMany(Recipe::class, 'user_id');
     }
-
-
-  
-
+    
     public function isAdmin()
     {
         return $this->role === self::ROLE_ADMIN;
@@ -69,6 +66,17 @@ class User extends Authenticatable
     {
         return $this->role === self::ROLE_USER;
     }
+
+    public function usersAndRecipes(){
+        $data = DB::table('users')
+                ->join('recipes', 'user_id', '=', 'users.id')
+                ->select('users.email', 'users.name', 'recipes.title')
+                ->get();
+                
+        return $data;
+    }
+
+   
 
 }
 

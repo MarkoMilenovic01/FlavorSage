@@ -68,8 +68,10 @@ class UserController extends Controller
     public function promoteDemote($id,Request $request){
         $user = User::find($id);
         $user->role = request('role');
-        $text = request('role') == 0 ? 'demoted' : 'promoted';
         $user->save();
+        $text = request('role') == 0 ? 'demoted' : 'promoted';
         return redirect('/admin/dashboard')->with('message', 'You have ' . $text . ' ' . $user->name);
     }
+
+
 }
