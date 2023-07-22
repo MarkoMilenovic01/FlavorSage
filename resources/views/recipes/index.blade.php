@@ -14,11 +14,17 @@
             @endfor
         </ul>
     </div>
-    <div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4">
-    @foreach($recipes as $recipe)
-        <x-card :recipe="$recipe" />
-    @endforeach
-    </div>
+  
+    @unless(count($recipes) == 0)
+        <div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4">
+            @foreach($recipes as $recipe)
+                <x-card :recipe="$recipe" />
+            @endforeach
+        </div>
+    @else
+        <h1 class="text-center text-red-600 text-2xl font-bold uppercase">There are no recipes in the database.</h1>
+    @endunless
+
     <div class="m-4">
         {{$recipes->links()}}
     </div>

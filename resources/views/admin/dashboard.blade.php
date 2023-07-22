@@ -15,6 +15,8 @@
 <h1 class="text-center text-4xl">Promote/Demote User</h1>
 
 <div class="flex flex-wrap justify-center mt-10">
+    {{-- -1 je zbog admina --}}
+    @unless(count($users) - 1 == 0)
     @foreach($users as $user)
     @if(!$user->isAdmin())
     
@@ -36,6 +38,9 @@
     </div>
     @endif
     @endforeach
+    @else
+    <h1 class="text-center text-red-600 text-2xl font-bold uppercase">There are no other users in the database.</h1>
+    @endunless
 </div>
 <div class="m-5">
     {{$users->links()}}

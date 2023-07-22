@@ -44,20 +44,6 @@
                     </div>
                 </div>
         </div>
-      <div class="mt-4 p-2 flex space-x-6 w-full">
-        <a href="/recipes/{{$recipe->id}}/edit">
-            <i class="fa-solid fa-pencil"> Edit</i>
-        </a>       
-    </div>  
-    <div class="mt-4 p-2 flex space-x-6 w-full">
-        <form action="/recipes/{{$recipe->id}}" method="POST">
-            @csrf
-            @method("DELETE")
-            <button type="submit">
-                <i class="fa-solid fa-trash">Delete</i>
-            </button>
-        </form>    
-    </div>  
     </main>
 
 
