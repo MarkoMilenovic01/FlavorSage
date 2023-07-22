@@ -5,8 +5,8 @@
 <div class="flex flex-col items-center justify-center m-10">
 <h1 class="text-center text-4xl">Export Data</h1>
 <div class="flex">
-    <a href="/download/excel"><button class="m-5 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" type="submit">Download Excel</button></a>
-    <a href="/download/pdf"><button class="m-5 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" type="submit">Download PDF</button></a>
+    <a href="/admin/download/pdf1"><button class="m-5 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600" type="submit">Download Count PDF</button></a>
+    <a href="/admin/download/pdf2"><button class="m-5 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" type="submit">Download Recipes PDF</button></a>
 </div>
 
 </div>
