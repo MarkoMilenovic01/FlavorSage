@@ -128,7 +128,7 @@ class RecipeFactory extends Factory
             'tags' => implode(',', $randomSubArray1),
             'email' => $this->faker->companyEmail(),
             'ingredients' => implode(',', $randomSubArray2),
-            'difficulty' => mt_rand(1,10),
+            'difficulty' => $this->faker->randomDigitNotNull(),
             'location' => $this->faker->city(),
             'description' => $this->faker->paragraph(5),
         ];

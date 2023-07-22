@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class RecipeController extends Controller
 {
@@ -42,7 +43,12 @@ class RecipeController extends Controller
 
         $formFields['user_id'] = auth()->id();
 
+        
+
         Recipe::insert($formFields);
+
+        $name = auth()->user()->name;
+        Log::channel('recipes')->info("User " . $name . " created a recipe.");
 
         return redirect('/')->with('message', 'Recipe created successfully!');
     }
@@ -81,6 +87,9 @@ class RecipeController extends Controller
 
         $recipe->update($formFields);
 
+        $name = auth()->user()->name;
+        Log::channel('recipes')->info("User " . $name . " edited a recipe with id " . $id);
+
         return redirect('/')->with('message', 'Recipe successfully edited!'); 
     }
 
@@ -92,6 +101,9 @@ class RecipeController extends Controller
         }
 
         $recipe->delete();
+
+        $name = auth()->user()->name;
+        Log::channel('recipes')->info("User " . $name . " deleted a  recipe with id " . $id);
 
         return redirect('/')->with('message', 'Recipe deleted successfully!');
     }

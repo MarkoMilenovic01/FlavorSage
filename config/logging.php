@@ -48,6 +48,19 @@ return [
     */
 
     'channels' => [
+
+        'recipes' => [
+            'driver' => 'daily', // Log to daily files
+            'path' => storage_path('logs/recipes.log'), // Log file path
+            'level' => 'info', // Log level (e.g., info, error, debug, etc.)
+        ],
+    
+        'users' => [
+            'driver' => 'daily', // Log to daily files
+            'path' => storage_path('logs/users.log'), // Log file path
+            'level' => 'info', // Log level (e.g., info, error, debug, etc.)
+        ],
+        
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],

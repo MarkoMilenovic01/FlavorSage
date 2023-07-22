@@ -81,8 +81,8 @@ Route::post('/recipes', [RecipeController::class, 'store'])->middleware('auth');
 Route::get('/recipes/manage', [RecipeController::class, 'manage'])->middleware('auth');
 
 Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->middleware('auth'); 
-
-
+Route::get('/admin/download/excel', [ExportController::class, 'excel'])->middleware('auth');
+Route::get('/admin/download/pdf', [ExportController::class, 'pdf'])->middleware('auth');
 
 
 

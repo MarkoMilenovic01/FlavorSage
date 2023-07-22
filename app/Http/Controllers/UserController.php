@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -23,15 +24,23 @@ class UserController extends Controller
 
         $user = User::create($formFields);
 
+        $name = $user->name;
+        Log::channel('users')->info("User " . $name . " registred.");
+        
         auth()->login($user);
 
         return redirect('/')->with('message', 'User created and logged in!');
     }
 
     public function logout(Request $request){
+        $name = auth()->user()->name;
+        Log::channel('users')->info("User " . $name . " logged out!");
+
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+       
 
         return redirect('/')->with('message', 'You have been logged out!'); 
     }
@@ -48,6 +57,10 @@ class UserController extends Controller
 
         if(auth()->attempt($formFields)){
             $request->session()->regenerate();
+
+            $name = auth()->user()->name;
+            Log::channel('users')->info("User " . $name . " logged in!");
+
 
             return redirect('/')->with('message', 'You are now logged in!');
         }
