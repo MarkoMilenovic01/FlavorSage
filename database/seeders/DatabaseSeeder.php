@@ -24,7 +24,12 @@ class DatabaseSeeder extends Seeder
         //     'user_id' => $user->id
         // ]);
 
-        User::factory(10)->create();
+        User::factory(3)->create();
+
+
+        for($i = 1; $i<=5; $i++){
+            Recipe::factory()->create(['user_id' => mt_rand(1,3)]);
+        }
 
     }
 }
